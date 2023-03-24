@@ -24,7 +24,8 @@ for dir in $(find ./../ -name ".git" -type d -exec dirname {} \;); do
     echo "=================== $repo_name ==================="
     # Mostrar los últimos commits del usuario actual del día actual
     # git -C "$dir" log --since=midnight --author="$user_name" --pretty=format:'%h - %an, %ar : %s'
-    git -C "$dir" log --author="$user_name" --since=midnight --oneline --pretty=format:'%s'
-
+    # git -C "$dir" log --author="$user_name" --since=midnight --oneline --pretty=format:'%s'
+    commit_log=$(git -C "$dir" log --author="$user_name" --since=midnight --oneline --pretty=format:'%s')
+    echo $commit_log
     echo
 done
