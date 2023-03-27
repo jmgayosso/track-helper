@@ -1,9 +1,9 @@
 # #!/bin/bash
 
 # Obtener el nombre de usuario del usuario actual
-# user_name='Jose Maria Gayosso'
 user_name=$(git config user.name )
 
+$token = $1
 # Buscar todos los directorios que sean repositorios de git en el directorio actual
 for dir in $(find ./../ -name ".git" -type d -exec dirname {} \;); do
     # Obtener el nombre del repositorio
