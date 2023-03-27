@@ -1,5 +1,10 @@
 # #!/bin/bash
 
+if [ ! -f "repos.txt" ]; then
+    echo "repos.txt not found"
+    exit 1
+fi
+
 # Obtener el nombre de usuario del usuario actual
 user_name=$(git config user.name)
 echo '[' > "commits.json"
