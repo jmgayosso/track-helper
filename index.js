@@ -1,5 +1,8 @@
+const { Configuration, OpenAIApi } = require('openai');
 const fs = require('fs');
+require('dotenv').config();
 
+function readBashData () {
 // Ejecutar el script Bash y capturar la ruta del archivo temporal
 const { spawnSync } = require('child_process');
 const script = spawnSync('bash', ['./track2.sh']);
@@ -18,5 +21,36 @@ let repos = content.trim().split('bash_repo:').map((repo) => {
 });
 
 repos = repos?.filter(v => v.commits !== undefined && v.commits !== '')
+return repos
+}
 
-console.log(repos);
+async function main () {
+    const repos = readBashData()
+    const logs = await getIntelligentLogs(repos)
+    console.log('logs', logs)
+}
+
+async function getIntelligentLogs (repos) {
+    const configuration = new Configuration({
+        apiKey: process.env.OPENAI_API_KEY,
+    });
+    const openai = new OpenAIApi(configuration);
+    const logs = []
+    const promises = await repos.map(async repo => {
+        const { data } = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: `Please write professional list of tasks to log daily progress report of the following tasks: ${repo.commits}`,
+            max_tokens: 2000,
+            temperature: 0,
+        })  
+        logs.push({
+            project: repo.name,
+            response: data.choices[0]?.text?.trim()
+        })
+    })
+    await Promise.all(promises)
+    return logs
+    // console.log('response', logs)
+}
+
+main()
