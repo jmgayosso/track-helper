@@ -7,7 +7,7 @@ user_name=$(git config user.name )
 output_file=$(mktemp)
 
 # Buscar todos los directorios que sean repositorios de git en el directorio actual
-for dir in $(find ./../ -name ".git" -type d -exec dirname {} \;); do
+for dir in $(find ./../../ -name ".git" -type d -exec dirname {} \;); do
     # Obtener el nombre del repositorio
     echo "bash_repo:" >> "$output_file"
     repo_name=$(basename "$dir")

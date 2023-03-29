@@ -1,0 +1,43 @@
+
+===================coinstr-ui====================
+
+Category: Development
+
+- Refactor methods to get joined version for send message nostr and save blockly policy  🔨
+- Merge branch 'dev' into feature/save-blockly-policy  🔀
+- Update config to use uglify just in prod build  🔧
+
+Category: Design
+- Update colors for settings  🎨
+
+===================track-helper====================
+
+Tasks:
+
+🔧 Fixed node_modules dir and added gitignore
+
+📚 Implemented OpenIa library and added function to get professional logs for each repo
+
+💻 Started node js project
+
+💻 Developed index file to call bash
+
+💻 Developed functions to read and map temporal files
+
+💻 Developed bash script to generate temporal file with all data for repos
+
+===================hashed-network-portal-ui====================
+
+in the user interface
+
+Task List:
+
+🔒 Security:
+- Added validations to see if cosigners have XPUB when vault is being created
+- Added banner to vault creation to show warning message regarding XPUB's cosigners
+
+🔧 Bug Fixes:
+- Fixed typos in the user interface
+
+🔀 Redirection:
+- Updated redirection to get HASH tokens when user is not a holder of HASH
