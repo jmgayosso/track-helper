@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Configuration, OpenAIApi } = require('openai');
 const fs = require('fs');
+const opn = require('opn');
 
 function readBashData () {
     // Ejecutar el script Bash y capturar la ruta del archivo temporal
@@ -60,13 +61,21 @@ function saveLogs (fileName, text) {
           console.error(err);
           return;
         }
-        console.log(`Logs guardados en el archivo ${fileName}.txt`);
+        console.log(`The logs was saved on logs/${fileName}.txt`);
     });
+}
+
+function openLogs (fileName) {
+    opn(`logs/${fileName}.txt`);
+    console.log('The logs was opened on your computer')
 }
 
 
 async function main () {
+    console.log('Getting commits from git');
     const repos = readBashData()
+
+    console.log('Making cool logs');
     const logs = await getIntelligentLogs(repos)
 
     // Get current date
@@ -76,8 +85,12 @@ async function main () {
     const year = today.getFullYear(); // obtenemos el año
     const formattedDate = `${month}-${day}-${year}`; // unimos las partes para formar la fecha en el formato mm-dd-aaaa
     
+    console.log('Saving logs')
     const text = formatLogsToTxt(logs)
     saveLogs(formattedDate, text)
+
+    console.log('Opening new logs');
+    openLogs(formattedDate)
 }
 
 main()
