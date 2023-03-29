@@ -1,25 +1,23 @@
-# #!/bin/bash
+#!/bin/bash
 
 # Obtener el nombre de usuario del usuario actual
 user_name=$(git config user.name )
 
-$token = $1
+# Crear un archivo temporal para almacenar la información de los repositorios
+output_file=$(mktemp)
+
 # Buscar todos los directorios que sean repositorios de git en el directorio actual
 for dir in $(find ./../ -name ".git" -type d -exec dirname {} \;); do
     # Obtener el nombre del repositorio
+    echo "bash_repo:" >> "$output_file"
     repo_name=$(basename "$dir")
-    # Mostrar el nombre del repositorio‧
-    echo "=================== $repo_name ==================="
-    # Mostrar los últimos commits del usuario actual del día actual
-    commit_log=$(git -C "$dir" log --author="$user_name" --since=midnight --oneline --pretty=format:'‧ %s')
-    echo $commit_log
-    # curl https://api.openai.com/v1/completions \
-    # -H "Content-Type: application/json" \
-    # -H "Authorization: Bearer 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" \
-    # -d '{
-    # "model": "text-davinci-003",
-    # "prompt": "Please do this tasks list in a proffesional format to log: ($commit_log)",
-    # "temperature": 0, "max_tokens": 2000
-    # }'
-    echo
+    # Almacenar el nombre del repositorio en el archivo temporal
+    echo "repo_name=$repo_name" >> "$output_file"
+    # Obtener los últimos commits del usuario actual del día actual
+    commit_log=$(git -C "$dir" log --author="$user_name" --since=midnight --oneline --pretty=format:'%s')
+    # Almacenar los últimos commits en el archivo temporal
+    echo "commit_log=$commit_log" >> "$output_file"
 done
+
+# Imprimir la ruta del archivo temporal en la consola
+echo "$output_file"
