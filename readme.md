@@ -18,7 +18,7 @@ To use Track Helper, you will need the following:
 3. Create a `.env` file in the root of the project and add your OpenAI API key to it in the following format:
 
     ```
-    OPENAI_API_KEY=your_api_key_here
+    OPENAI_API_KEY='your_api_key_here'
     ```
 
 You can find your OpenAI API key on the [OpenAI dashboard](https://platform.openai.com/account/api-keys).
