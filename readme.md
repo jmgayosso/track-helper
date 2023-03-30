@@ -37,8 +37,28 @@ To use Track Helper, run the following command:
 npm start
 ```
 
-
 Track Helper will generate daily progress reports for all the repositories you have worked on since the last time you ran the command. The progress reports will be saved in a text file in the `logs` directory, and the file will be opened automatically.
+
+## Example of result log.txt
+
+```
+===================track-helper====================
+
+🐛 Fix:
+- Readme.md: Add quotes around the OpenAI API key in the .env file example
+
+✨ Feature:
+- .env.example: Add OPENAI_API_KEY environment variable example
+
+📝 Documentation:
+- Readme.md: Add note on folder structure for track.sh script to function properly
+- Readme.md: Add instructions for contributing to the project
+
+Chore:
+- Remove .env file from gitignore and delete it
+- Add logs directory to gitignore
+- Delete logs/03-28-2023.txt file
+````
 
 ## Contributing
 
