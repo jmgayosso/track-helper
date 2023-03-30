@@ -23,6 +23,13 @@ To use Track Helper, you will need the following:
 
 You can find your OpenAI API key on the [OpenAI dashboard](https://platform.openai.com/account/api-keys).
 
+## Note on Folder Structure
+
+In order for the `track.sh` script to correctly locate your Git repositories, make sure that your repositories are all located in a single parent directory. For example, you might create a directory called `repos` and place all of your Git repositories inside that directory. The `track.sh` script will search for repositories in the `repos` directory, so make sure that all of your repositories are located there in order for the script to function properly.
+
+If you want to use a different parent directory for your repositories, you can modify the `REPOS_DIR` variable in the `track.sh` script to point to the correct directory path.
+
+
 ## Usage
 
 To use Track Helper, run the following command:
