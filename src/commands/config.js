@@ -154,5 +154,6 @@ const configCommand = command(
 
 
 module.exports = {
+    getConfig,
     configCommand
 }
