@@ -55,13 +55,18 @@ function formatLogsToTxt (logs) {
     return txt
 }
 
-function saveLogs (fileName, text) {
-    fs.writeFile(`logs/${fileName}.txt`, text, (err) => { // Escribir los datos en el archivo
+function saveLogs(fileName, text) {
+    const logsDir = 'logs';
+    if (!fs.existsSync(logsDir)) {
+        console.log('Creating logs dir')
+        fs.mkdirSync(logsDir);
+    }
+    fs.writeFile(`${logsDir}/${fileName}.txt`, text, (err) => {
         if (err) {
-          console.error(err);
-          return;
+            console.error(err);
+            return;
         }
-        console.log(`The logs was saved on logs/${fileName}.txt`);
+        console.log(`The logs was saved on ${logsDir}/${fileName}.txt`);
     });
 }
 
