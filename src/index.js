@@ -29,10 +29,9 @@ async function getIntelligentLogs (repos) {
         apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
-
     const { data } = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `Write a list for a report of tasks done today (software developer tasks), group tasks by category for each project, use icons for each task regarding with the description (replace current icons), use separators for each report (like ==========project.name===========), describe in a professional way the tasks: ${JSON.stringify(repos)}`,
+        prompt: `Write a list for a report of tasks done today (software developer tasks), group tasks by category and by project, use icons for each task regarding with the description (replace current icons), describe in a professional way the tasks, use the following projects array info and use separators for each project list (like ==========project.name===========): ${JSON.stringify(repos)}`,
         max_tokens: 2000,
         temperature: 1,
     })
