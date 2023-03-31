@@ -29,21 +29,14 @@ async function getIntelligentLogs (repos) {
         apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
-    const logs = []
-    const promises = await repos.map(async repo => {
-        const { data } = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: `Please write professional list of tasks to log daily progress report of the following tasks and group by category, please use a few icons: ${repo.commits}`,
-            max_tokens: 2000,
-            temperature: 0,
-        })  
-        logs.push({
-            project: repo.name,
-            response: data.choices[0]?.text?.trim()
-        })
+
+    const { data } = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: `Write a list for a report of tasks done today (software developer tasks), group tasks by category for each project, use some icons, use separators for each report (like =====================), describe in a professional way the tasks: ${JSON.stringify(repos)}`,
+        max_tokens: 2000,
+        temperature: 0.5,
     })
-    await Promise.all(promises)
-    return logs
+    return data.choices[0]?.text?.trim()
 }
 
 function formatLogsToTxt (logs) {
@@ -91,8 +84,9 @@ async function main () {
     const formattedDate = `${month}-${day}-${year}`; // unimos las partes para formar la fecha en el formato mm-dd-aaaa
     
     console.log('Saving logs')
-    const text = formatLogsToTxt(logs)
-    saveLogs(formattedDate, text)
+    // const text = formatLogsToTxt(logs)
+
+    saveLogs(formattedDate, logs)
 
     console.log('Opening new logs');
     openLogs(formattedDate)
