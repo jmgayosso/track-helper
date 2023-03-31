@@ -32,9 +32,9 @@ async function getIntelligentLogs (repos) {
 
     const { data } = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `Write a list for a report of tasks done today (software developer tasks), group tasks by category for each project, use some icons, use separators for each report (like =====================), describe in a professional way the tasks: ${JSON.stringify(repos)}`,
+        prompt: `Write a list for a report of tasks done today (software developer tasks), group tasks by category for each project, use icons for each task regarding with the description (replace current icons), use separators for each report (like ==========project.name===========), describe in a professional way the tasks: ${JSON.stringify(repos)}`,
         max_tokens: 2000,
-        temperature: 0.5,
+        temperature: 1,
     })
     return data.choices[0]?.text?.trim()
 }
@@ -78,10 +78,10 @@ async function main () {
 
     // Get current date
     const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // obtenemos el mes y lo formateamos con dos dígitos
-    const day = String(today.getDate()).padStart(2, '0'); // obtenemos el día y lo formateamos con dos dígitos
-    const year = today.getFullYear(); // obtenemos el año
-    const formattedDate = `${month}-${day}-${year}`; // unimos las partes para formar la fecha en el formato mm-dd-aaaa
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const year = today.getFullYear();
+    const formattedDate = `${month}-${day}-${year}`;
     
     console.log('Saving logs')
     // const text = formatLogsToTxt(logs)
