@@ -27,7 +27,7 @@ for dir in "${repo_directories[@]}"; do
     # Almacenar el nombre del repositorio en el archivo temporal
     echo "repo_name=$repo_name" >> "$output_file"
     # Obtener los últimos commits del usuario actual del día actual
-    commit_log=$(git -C "$dir" log --author="$user_name" --since=midnight --all)
+    commit_log=$(git -C "$dir" log --author="$user_name" --since="midnight" --all)
     # Almacenar los últimos commits en el archivo temporal
     echo "commit_log=$commit_log" >> "$output_file"
 done

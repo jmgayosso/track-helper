@@ -31,15 +31,15 @@ async function getIntelligentLogs (repos) {
     });
     const openai = new OpenAIApi(configuration);
     const { data } = await openai.createCompletion({
-        model: "text-davinci-003",
+        model: "gpt-3.5-turbo-instruct",
         prompt: `Write a list for a report of tasks done today (software developer tasks), group tasks by category and by project, use icons for each task regarding with the description (replace current icons if necessary to match the gitmoji standart), describe in a professional way the tasks.
         Here is an example:
-🛠 Fix: Removed unused imports and commented out code to improve code cleanliness and readability
-⚡️ Feature: Renamed do_setup_asset function to do_create_afloat_asset for better naming consistency and clarity
-⚡️ Feature: Refactored InitialSetupArgs::All match arm to call necessary setup functions in the correct order for initializing afloat pallet
-🛠 Fix: Removed unnecessary commented out code in pallet module
-🔄 Refactor: Removed unnecessary empty line in Afloat pallet module
-📝 Docs: Added documentation for do_setup_roles function in Afloat pallet to explain its inputs and purpose
+Fix: Removed unused imports and commented out code to improve code cleanliness and readability
+Feature: Renamed do_setup_asset function to do_create_afloat_asset for better naming consistency and clarity
+Feature: Refactored InitialSetupArgs::All match arm to call necessary setup functions in the correct order for initializing afloat pallet
+Fix: Removed unnecessary commented out code in pallet module
+Refactor: Removed unnecessary empty line in Afloat pallet module
+Docs: Added documentation for do_setup_roles function in Afloat pallet to explain its inputs and purpose
 
 ALSO: Use the following projects array info and use separators for each project list (like ==========project.name===========): ${JSON.stringify(repos)}`,
         max_tokens: 2000,
