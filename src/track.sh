@@ -9,6 +9,7 @@ output_file=$(mktemp)
 # Definir la lista de directorios de repositorios de Git
 repo_directories=(
     "/home/tlalocman/github.com/prxyco/backend"
+    "/home/tlalocman/github.com/prxyco/ui"
     "/home/tlalocman/github.com/hashed-io/hashed-pallets"
     "/home/tlalocman/github.com/hashed-io/hashed-solochain"
     "/home/tlalocman/github.com/hashed-io/hashed-substrate"
